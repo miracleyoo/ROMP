@@ -16,3 +16,4 @@ __pycache__/
 demo/images/
 log/*
 .DS_STORE
+backup/
