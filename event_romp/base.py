@@ -13,19 +13,19 @@ from torch.utils.data import Dataset, DataLoader, ConcatDataset
 
 # sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 
-from lib import config
-from lib import constants
-from lib.config import args, parse_args, ConfigContext
-from lib.models import build_model
-from lib.models.balanced_dataparallel import DataParallel
-from lib.utils import *
-from lib.utils.projection import vertices_kp3d_projection
-from lib.utils.train_utils import justify_detection_state
-from lib.evaluation import compute_error_verts, compute_similarity_transform, compute_similarity_transform_torch, \
+from .lib import config
+from .lib import constants
+from .lib.config import args, parse_args, ConfigContext
+from .lib.models import build_model
+from .lib.models.balanced_dataparallel import DataParallel
+from .lib.utils import *
+from .lib.utils.projection import vertices_kp3d_projection
+from .lib.utils.train_utils import justify_detection_state
+from .lib.evaluation import compute_error_verts, compute_similarity_transform, compute_similarity_transform_torch, \
                     batch_compute_similarity_transform_torch, compute_mpjpe, \
                     determ_worst_best, reorganize_vis_info
-from lib.dataset.mixed_dataset import MixedDataset, SingleDataset
-from lib.visualization.visualization import Visualizer
+from .lib.dataset.mixed_dataset import MixedDataset, SingleDataset
+from .lib.visualization.visualization import Visualizer
 if args().model_precision=='fp16':
     from torch.cuda.amp import autocast, GradScaler
 
