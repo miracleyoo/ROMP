@@ -1,4 +1,4 @@
-TRAIN_CONFIGS='configs/v1_resnet.yml'
+TRAIN_CONFIGS='configs/dvs_v1_resnet.yml'
 
 GPUS=$(cat $TRAIN_CONFIGS | shyaml get-value ARGS.gpu)
 DATASET=$(cat $TRAIN_CONFIGS | shyaml get-value ARGS.dataset)
