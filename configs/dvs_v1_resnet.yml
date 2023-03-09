@@ -49,10 +49,11 @@ loss_weight:
   Cam: 200.
 
 sample_prob:
- h36m: 0.2
- mpiinf: 0.16
- coco: 0.2
- lsp: 0.06
- mpii: 0.1
- muco: 0.14
- crowdpose: 0.14
+ h36m: 1
+#  h36m: 0.2
+#  mpiinf: 0.16
+#  coco: 0.2
+#  lsp: 0.06
+#  mpii: 0.1
+#  muco: 0.14
+#  crowdpose: 0.14
