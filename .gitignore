@@ -4,7 +4,7 @@ models/
 demo/videos/
 demo/animation/
 model_data/
-romp/
+# romp/
 demo/*_results*/
 active_configs/*
 configs/*_self.yml
