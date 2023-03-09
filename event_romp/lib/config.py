@@ -10,7 +10,7 @@ import platform
 
 currentfile = os.path.abspath(__file__)
 code_dir = currentfile.replace('config.py','')
-project_dir = currentfile.replace(os.path.sep+os.path.join('romp', 'lib', 'config.py'), '')
+project_dir = currentfile.replace(os.path.sep+os.path.join('event_romp', 'lib', 'config.py'), '')
 source_dir = currentfile.replace(os.path.sep+os.path.join('lib', 'config.py'), '')
 root_dir = project_dir.replace(project_dir.split(os.path.sep)[-1], '')
 
