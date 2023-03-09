@@ -58,6 +58,7 @@ class MixedDataset(Dataset):
         print(dataset_info_table)
         self.total_length = min(int(expect_length.max()), max_length)
         logging.info('All dataset length: {}'.format(len(self)))
+        logging.info('Number of datasets used: {}'.format(len(datasets_used)))
 
     def _get_ID_num_(self):
         return self.ID_num
@@ -65,6 +66,7 @@ class MixedDataset(Dataset):
     def __getitem__(self, index):
         p = float(index)/float(self.total_length)
         dataset_id = len(self.partition)-(self.partition>p).sum()
+        print(len(self.partition), (self.partition>p).sum(), dataset_id)
 
         upper_bound = self.partition[dataset_id]
         lower_bound = self.partition[dataset_id-1] if dataset_id>0 else 0
