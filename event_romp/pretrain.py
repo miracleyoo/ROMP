@@ -1,10 +1,10 @@
-from base import *
-from eval import val_result
-from lib.loss_funcs import Learnable_Loss
-from lib.maps_utils import HeatmapParser,CenterMap
-from lib.loss_funcs.maps_loss import focal_loss, Heatmap_AE_loss
-from lib.loss_funcs.keypoints_loss import batch_kp_2d_l2_loss
-from lib.visualization.visualization import draw_skeleton_multiperson, draw_skeleton, make_heatmaps
+from .base import *
+from .eval import val_result
+from .lib.loss_funcs import Learnable_Loss
+from .lib.maps_utils import HeatmapParser,CenterMap
+from .lib.loss_funcs.maps_loss import focal_loss, Heatmap_AE_loss
+from .lib.loss_funcs.keypoints_loss import batch_kp_2d_l2_loss
+from .lib.visualization.visualization import draw_skeleton_multiperson, draw_skeleton, make_heatmaps
 np.set_printoptions(precision=2, suppress=True)
 
 class Trainer(Base):

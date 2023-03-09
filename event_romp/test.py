@@ -1,8 +1,8 @@
 
 from .base import *
-from lib.loss_funcs import _calc_MPJAE, calc_mpjpe, calc_pampjpe, align_by_parts
+from .lib.loss_funcs import _calc_MPJAE, calc_mpjpe, calc_pampjpe, align_by_parts
 from .eval import val_result,print_results
-from lib.visualization.visualization import draw_skeleton_multiperson
+from .lib.visualization.visualization import draw_skeleton_multiperson
 import pandas
 import pickle
 

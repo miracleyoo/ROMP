@@ -1,8 +1,8 @@
 
 from .base import *
-from lib.loss_funcs import _calc_MPJAE, calc_mpjpe, calc_pampjpe, calc_pck, align_by_parts
-from lib.evaluation import h36m_evaluation_act_wise, cmup_evaluation_act_wise
-from lib.evaluation.evaluation_matrix import _calc_relative_age_error_weak_, _calc_absolute_depth_error,\
+from .lib.loss_funcs import _calc_MPJAE, calc_mpjpe, calc_pampjpe, calc_pck, align_by_parts
+from .lib.evaluation import h36m_evaluation_act_wise, cmup_evaluation_act_wise
+from .lib.evaluation.evaluation_matrix import _calc_relative_age_error_weak_, _calc_absolute_depth_error,\
                                     _calc_relative_depth_error_weak_, _calc_relative_depth_error_withgts_, _calc_matched_PCKh_
 
 
