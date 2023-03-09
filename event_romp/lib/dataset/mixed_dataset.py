@@ -66,7 +66,7 @@ class MixedDataset(Dataset):
     def __getitem__(self, index):
         p = float(index)/float(self.total_length)
         dataset_id = len(self.partition)-(self.partition>p).sum()
-        print(len(self.partition), (self.partition>p).sum(), dataset_id)
+        # print(len(self.partition), (self.partition>p).sum(), dataset_id)
 
         upper_bound = self.partition[dataset_id]
         lower_bound = self.partition[dataset_id-1] if dataset_id>0 else 0
