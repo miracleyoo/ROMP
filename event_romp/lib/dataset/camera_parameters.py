@@ -1,7 +1,10 @@
 import torch
 import copy
 import numpy as np
-from ..utils.util import wrap
+
+import sys
+sys.path.append("..")
+from utils.util import wrap
 
 h36m_cameras_intrinsic_params = [
     {
