@@ -56,6 +56,7 @@ def load_model(path, model, prefix = 'module.', drop_prefix='',optimizer=None, *
             if 'model_state_dict' in pretrained_model:
                 pretrained_model = pretrained_model['model_state_dict']
         copy_state_dict(current_model, pretrained_model, prefix = prefix, drop_prefix=drop_prefix, **kwargs)
+        logging.info('loading model {} success!'.format(path))
     else:
         logging.warning('model {} not exist!'.format(path))
     return model
