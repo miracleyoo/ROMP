@@ -6,12 +6,12 @@ from dataset.camera_parameters import h36m_cameras_intrinsic_params
 
 default_mode = args().image_loading_mode
 
-def H36MDVS(base_class=default_mode):
-    class H36MDVS(Base_Classes[base_class]):
+def EH36M(base_class=default_mode):
+    class EH36M(Base_Classes[base_class]):
 
         def __init__(self, train_flag=True, split='train',regress_smpl=True,**kwargs):
-            super(H36M, self).__init__(train_flag,regress_smpl)
-            self.data_folder = os.path.join(self.data_folder,'h36m/')
+            super(EH36M, self).__init__(train_flag,regress_smpl)
+            self.data_folder = os.path.join(self.data_folder,'eh36m/')
             self.image_folder = os.path.join(self.data_folder,'images/')
             self.annots_file = os.path.join(self.data_folder,'annots.npz')
             self.scale_range = [1.4,2.0]
@@ -88,7 +88,7 @@ def H36MDVS(base_class=default_mode):
             subject_id = img_name.split('_')[0]
             track_ids = [self.track_id[subject_id]]
             
-            info = self.annots[img_name].copy()
+            info = self.annots[img_name.replace('.npy' ,'.jpg')].copy()
 
             cam_view_id = int(img_name.split('_')[2])
             camMats = self.camMat_views[cam_view_id]
@@ -96,7 +96,8 @@ def H36MDVS(base_class=default_mode):
             root_trans = info['kp3d_mono'].reshape(-1,3)[[constants.H36M_32['R_Hip'], constants.H36M_32['L_Hip']]].mean(0)[None]
 
             imgpath = os.path.join(self.image_folder,img_name)
-            image = cv2.imread(imgpath)[:,:,::-1]
+            # image = cv2.imread(imgpath)[:,:,::-1]
+            image = np.load(imgpath).transpose(1,2,0)
             kp2d = self.map_kps(info['kp2d'].reshape(-1,2).copy(),maps=self.joint_mapper)
             kp2ds = np.concatenate([kp2d,self.kps_vis],1)[None]
             
@@ -134,9 +135,9 @@ def H36MDVS(base_class=default_mode):
                 return len(self.file_paths)//self.compress_length
             else:
                 return len(self.file_paths)
-    return H36M
+    return EH36M
 
 if __name__ == '__main__':
-    h36m = H36MDVS(base_class=default_mode)(True,regress_smpl=True)
+    eh36m = EH36M(base_class=default_mode)(True,regress_smpl=True)
     #h36m = H36M(True,regress_smpl=True)
-    Test_Funcs[default_mode](h36m, with_3d=True,with_smpl=True,)
+    Test_Funcs[default_mode](eh36m, with_3d=True,with_smpl=True,)

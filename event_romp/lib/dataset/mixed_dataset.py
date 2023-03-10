@@ -28,9 +28,11 @@ from .MuPoTS import MuPoTS
 from .relative_human import Relative_human
 from .agora import AGORA
 
+from .eh36m import EH36M
+
 dataset_dict = {'h36m': H36M, 'mpii': MPII, 'coco': COCO14, 'posetrack':Posetrack21, 'aich':AICH, 'pw3d':PW3D, 'up':UP, 'crowdpose':Crowdpose, 'crowdhuman':CrowdHuman, \
     'lsp':LSP, 'mpiinf':MPI_INF_3DHP,'mpiinf_val':MPI_INF_3DHP_VALIDATION,'mpiinf_test':MPI_INF_3DHP_TEST, 'muco':MuCo, 'mupots':MuPoTS, \
-    'cmup':CMU_Panoptic_eval,'internet':Internet, 'relative_human': Relative_human, 'agora':AGORA}
+    'cmup':CMU_Panoptic_eval,'internet':Internet, 'relative_human': Relative_human, 'agora':AGORA, 'eh36m':EH36M}
 
 class MixedDataset(Dataset):
     def __init__(self, datasets_used, sample_prob_dict, loading_modes=None, max_length=args().batch_size*10000, **kwargs):
