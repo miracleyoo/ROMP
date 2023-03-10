@@ -72,7 +72,7 @@ def EH36M(base_class=default_mode):
 
             if self.homogenize_pose_space and self.train_flag:
                 cluster_results_file = os.path.join(self.data_folder, 'cluster_results_noumap_h36m_kmeans.npz')
-                self.cluster_pool = self.parse_cluster_results(cluster_results_file,self.file_paths)
+                self.cluster_pool = self.parse_cluster_results(cluster_results_file,[f.replace('.npy','.jpg') for f in self.file_paths])
             
             if self.train_flag:
                 self.sample_num = len(self.file_paths)//self.compress_length
