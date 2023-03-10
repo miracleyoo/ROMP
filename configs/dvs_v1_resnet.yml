@@ -1,9 +1,10 @@
 
 ARGS:
  tab: 'DVS_V1_resnet' 
- dataset: 'h36m'
+ dataset: 'pw3d'
+ #h36m,
  dataset_rootdir: '/gypsum/work1/trahman/zhongyangzha/dvs_hpe/rgb_dataset/human3.6m'
- gpu: '0,1,2,3'
+ gpu: '0'
  distributed_training: False
  model_version: 1
  match_preds_to_gts_for_supervision: True
@@ -49,7 +50,8 @@ loss_weight:
   Cam: 200.
 
 sample_prob:
- h36m: 1
+  pw3d: 1
+#  h36m: 1
 #  h36m: 0.2
 #  mpiinf: 0.16
 #  coco: 0.2
