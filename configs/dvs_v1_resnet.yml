@@ -4,8 +4,8 @@ ARGS:
  dataset: 'h36m'
  #h36m,
  dataset_rootdir: '/gypsum/work1/trahman/zhongyangzha/dvs_hpe/rgb_dataset/human3.6m'
- gpu: '0'
- distributed_training: False
+ gpu: '0,1,2,3'
+ distributed_training: True
  model_version: 1
  match_preds_to_gts_for_supervision: True
 
