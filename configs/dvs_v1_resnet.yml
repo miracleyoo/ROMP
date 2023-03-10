@@ -36,7 +36,7 @@ ARGS:
  centermap_size: 64
  centermap_conf_thresh: 0.2
 
- model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models'
+ model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/pretrain_resnet.pkl'
  in_channel: 3
 
 loss_weight:
