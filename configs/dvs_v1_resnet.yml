@@ -1,7 +1,7 @@
 
 ARGS:
  tab: 'DVS_V1_resnet' 
- dataset: 'pw3d'
+ dataset: 'h36m'
  #h36m,
  dataset_rootdir: '/gypsum/work1/trahman/zhongyangzha/dvs_hpe/rgb_dataset/human3.6m'
  gpu: '0'
@@ -36,7 +36,7 @@ ARGS:
  centermap_size: 64
  centermap_conf_thresh: 0.2
 
- model_path: None
+ model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models'
  in_channel: 3
 
 loss_weight:
@@ -50,7 +50,7 @@ loss_weight:
   Cam: 200.
 
 sample_prob:
-  pw3d: 1
+  h36m: 1
 #  h36m: 1
 #  h36m: 0.2
 #  mpiinf: 0.16
