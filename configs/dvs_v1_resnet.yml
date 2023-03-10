@@ -11,7 +11,7 @@ ARGS:
 
  master_batch_size: -1
  val_batch_size: 16
- batch_size: 128
+ batch_size: 64
  nw: 4
  nw_eval: 2
  lr: 0.00005
@@ -36,7 +36,7 @@ ARGS:
  centermap_size: 64
  centermap_conf_thresh: 0.2
 
- model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/pretrain_resnet.pkl'
+ model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
  in_channel: 3
 
 loss_weight:
