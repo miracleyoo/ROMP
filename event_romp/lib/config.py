@@ -139,7 +139,7 @@ def parse_args(input_args=None):
     maps_group.add_argument('--center_def_kp', type=bool, default=True,help = 'center definition: keypoints or bbox')
 
     distributed_train_group = parser.add_argument_group(title='options for distributed training')
-    distributed_train_group.add_argument('--local_rank',type = int,default=0,help = 'local rank for distributed training')
+    distributed_train_group.add_argument('--local_rank',type = int,default=0, help = 'local rank for distributed training')
     distributed_train_group.add_argument('--distributed_training', type=bool, default=False,help = 'wether train model in distributed mode')
 
     distillation_group = parser.add_argument_group(title='options for distillation')
