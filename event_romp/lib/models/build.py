@@ -12,7 +12,7 @@ Heads = {1: ROMP, 6:BEV}
 
 def build_model():
     if args().backbone in Backbones:
-        backbone = Backbones[args().backbone]()
+        backbone = Backbones[args().backbone](args.in_channel)
     else:
         raise NotImplementedError("Backbone is not recognized")
     if args().model_version in Heads:
