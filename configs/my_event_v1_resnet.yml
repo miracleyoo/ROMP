@@ -25,7 +25,7 @@ ARGS:
  model_return_loss: True
  collision_aware_centermap: True
  collision_factor: 0.2
- homogenize_pose_space: True
+ homogenize_pose_space: False
  shuffle_crop_mode: True
  shuffle_crop_ratio_2d: 0.1
  shuffle_crop_ratio_3d: 0.4
