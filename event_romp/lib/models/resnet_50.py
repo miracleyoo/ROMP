@@ -33,7 +33,8 @@ class ResNet_50(nn.Module):
     def image_preprocess(self, x):
         x = BHWC_to_BCHW(x)/255.
         #x = F.normalize(x, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225],inplace=True).contiguous() # for pytorch version>1.8.0
-        x = torch.stack(list(map(lambda x:F.normalize(x, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225],inplace=False),x)))
+        # !!!! UNCOMMENT THIS LINE LATER
+        # x = torch.stack(list(map(lambda x:F.normalize(x, [0.485, 0.456, 0.406], [0.229, 0.224, 0.225],inplace=False),x)))
         #x = ((BHWC_to_BCHW(x)/ 255.) * 2.0 - 1.0).contiguous()
         
         return x
