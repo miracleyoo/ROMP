@@ -165,6 +165,8 @@ class Visualizer(object):
         img_inds_org = [inds[0] for inds in per_img_inds]
         img_names = np.array(meta_data['imgpath'])[img_inds_org]
         org_imgs = meta_data['image'].cpu().numpy().astype(np.uint8)[img_inds_org]
+        if org_imgs.shape[1] >= 6:
+            org_imgs = batch_tore_rg(org_imgs)
         detection_flag = outputs['detection_flag'].sum()>0
 
         plot_dict = OrderedDict()
@@ -336,6 +338,29 @@ def draw_skeleton_multiperson(image, pts_group,**kwargs):
         image = draw_skeleton(image, pts, **kwargs)
     return image
 
+def tore_to_redgreen(tore):
+    """ Make each layer of tore a rgb image in which red is the positive channel and green is negative.
+    Args:
+        tore: ndarray, whether 6 or 8 channels.
+    Return:
+        combined: the combined images.
+    """
+    h, w, c = tore.shape
+    tore = tore.reshape(h, w, 3, 2)[:,:,0,:]
+    rgb = np.concatenate((tore, np.zeros((h,w,1))), axis=-1)
+    return rgb
+
+def batch_tore_rg(tores):
+    """ Make each layer of tore a rgb image in which red is the positive channel and green is negative.
+    Args:
+        tore: ndarray, whether 6 or 8 channels.
+    Return:
+        combined: the combined images.
+    """
+    batch = []
+    for tore in tores:
+        batch.append(tore_to_redgreen(tore))
+    return np.stack(batch,0)
 
 class Plotter3dPoses:
 
