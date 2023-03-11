@@ -21,7 +21,7 @@ class Trainer(Base):
             self.heatmap_aeloss = Heatmap_AE_loss(17, loss_type_HM=args().HMloss_type, loss_type_AE='exp')
             self.centermap_parser = CenterMap()
         self.train_cfg = {'mode':'train', 'update_data': True, 'calc_loss': True if self.model_return_loss else False, \
-                           'new_training': Flase}
+                           'new_training': False}
         self.eval_cfg = {'mode':'train', 'calc_loss': False}
         self.val_cfg = {'mode':'val', 'calc_loss': False}
         

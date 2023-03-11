@@ -93,6 +93,7 @@ def calc_outputs_evaluation_matrix(self, outputs, ED):
 def val_result(self, loader_val, evaluation = False, vis_results=False):
     eval_model = nn.DataParallel(self.model.module).eval()
     ED = _init_error_dict()
+    print('Loader_val:', loader_val)
 
     for iter_num, meta_data in enumerate(loader_val):
         if meta_data is None:

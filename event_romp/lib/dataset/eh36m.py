@@ -54,7 +54,7 @@ def EH36M(base_class=default_mode):
                 self.multi_mode=False
                 self.scale_range=[1.8,1.8]
 
-            logging.info('Loaded Human3.6M data,total {} samples'.format(self.__len__()))
+            logging.info('Loaded Event-ized Human3.6M data,total {} samples'.format(self.__len__()))
 
         def load_file_list(self):
             self.file_paths = []
