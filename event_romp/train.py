@@ -1,8 +1,13 @@
+import tempfile
+tempfile.tempdir = '/tmp'
+
 from .base import *
 from .eval import val_result
 from .lib.loss_funcs import Loss, Learnable_Loss
 
+
 np.set_printoptions(precision=2, suppress=True)
+
 
 class Trainer(Base):
     def __init__(self):
