@@ -123,7 +123,7 @@ def EH36M(base_class=default_mode):
             img_info = {'imgpath': imgpath, 'image': image, 'kp2ds': kp2ds, 'track_ids': track_ids,\
                     'vmask_2d': np.array([[True,True,True]]), 'vmask_3d': np.array([[True,True,True,True,True,True]]),\
                     'kp3ds': kp3ds, 'params': params, 'root_trans': root_trans, 'verts': verts,\
-                    'camMats': camMats, 'camDists': camDists, 'img_size': image.shape[:2], 'ds': 'h36m'}
+                    'camMats': camMats, 'camDists': camDists, 'img_size': image.shape[:2], 'ds': 'eh36m'}
             if 'relative' in base_class:
                 img_info['depth'] = np.array([[0, self.subject_gender[subject_id], 0, 0]])
                 img_info['kid_shape_offsets'] = np.array([0])
