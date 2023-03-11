@@ -42,7 +42,7 @@ def EH36M(base_class=default_mode):
             self.shuffle_mode = args().shuffle_crop_mode
             self.shuffle_ratio = args().shuffle_crop_ratio_3d
             self.test2val_sample_ratio = 10
-            self.compress_length = 5
+            self.compress_length = 1 #5
 
             self.subject = self.train_test_subject[self.phase]
             self.openpose_results = os.path.join(self.data_folder,"h36m_openpose_{}.npz".format(self.phase))
