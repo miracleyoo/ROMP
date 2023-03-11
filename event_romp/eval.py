@@ -128,6 +128,7 @@ def val_result(self, loader_val, evaluation = False, vis_results=False):
 
     print('{} on local_rank {}'.format(['Evaluation' if evaluation else 'Validation'], self.local_rank))
     eval_results = print_results(ED)
+    print(ED)
 
     return eval_results
 
