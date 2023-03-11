@@ -168,6 +168,10 @@ class Base(object):
             self.dataset_val_list['h36m'] = self._create_single_data_loader(dataset='h36m', train_flag=False, split='val')
             self.dataset_test_list['h36m'] = self._create_single_data_loader(dataset='h36m', train_flag=False, split='test')
             self.val_best_PAMPJPE['h36m'] = 53
+        if 'eh36m' in eval_datasets:
+            self.dataset_val_list['eh36m'] = self._create_single_data_loader(dataset='eh36m', train_flag=False, split='val')
+            self.dataset_test_list['eh36m'] = self._create_single_data_loader(dataset='eh36m', train_flag=False, split='test')
+            self.val_best_PAMPJPE['eh36m'] = 53
         if 'pw3d_pc' in eval_datasets:
             self.dataset_test_list['pw3d_pc'] = self._create_single_data_loader(dataset='pw3d', train_flag = False, split='all', mode='PC')
         if 'pw3d' in eval_datasets:
