@@ -11,8 +11,8 @@ ARGS:
  match_preds_to_gts_for_supervision: True
 
  master_batch_size: -1
- val_batch_size: 16
- batch_size: 64
+ val_batch_size: 4
+ batch_size: 16
  nw: 4
  nw_eval: 2
  lr: 0.00005
