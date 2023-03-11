@@ -221,7 +221,7 @@ body1352coco25 = np.array([0,17,6,8,10,5,7,9,-1,12,14,16,11,13,15,2,1,4,3, 19,20
 ps_2_openpose25 = np.array([1,0, 9,10,11, 3,4,5, 2, 12,13,14, 6,7,8, 17,15, 18,16, -1,-1,-1, -1,-1,-1])
 openpose19_2_ps = np.array([1,0,8, 5,6,7, 12,13,14, 2,3,4, 9,10,11, 15,16,17,18])
 
-valid_kp_mask_smpl24 = {'h36m':h36m32_2_smpl24!=-1 , 'mpiinf':mpiinf28_2_smpl24!=-1 , 'pw3d':np.ones(24).astype(np.bool), 'mupots': mupots17_2_smpl24!=-1, 'muco':muco21_2_smpl24!=-1}
+valid_kp_mask_smpl24 = {'eh36m':h36m32_2_smpl24!=-1, 'h36m':h36m32_2_smpl24!=-1 , 'mpiinf':mpiinf28_2_smpl24!=-1 , 'pw3d':np.ones(24).astype(np.bool), 'mupots': mupots17_2_smpl24!=-1, 'muco':muco21_2_smpl24!=-1}
 
 global_orient_nocam = np.array([0,0,np.pi])
 
@@ -315,10 +315,10 @@ cmup_action_names = ['haggling1', 'mafia2', 'ultimatum1', 'pizza1']
 
 SMPL_MAJOR_JOINTS = np.array([1, 2, 4, 5, 7, 8, 16, 17, 18, 19, 20, 21])
 
-dataset_involved = ['h36m', 'mupots', 'pw3d', 'mpiinf', 'jta','cmup', 'oh','mpiinf_test', 'pw3d_pc', 'pw3d_nc','pw3d_oc','pw3d_vibe', 'pw3d_normal','agora','mini','pw3d_od']
-dataset_kp2ds = ['h36m', 'mupots', 'pw3d', 'mpiinf', 'jta','cmup', 'oh','mpiinf_test', 'pw3d_pc', 'pw3d_nc','pw3d_oc','pw3d_vibe', 'pw3d_normal','agora','mini','relativity', 'aich', 'crowdpose','pw3d_od']
-dataset_smpl2lsp = ['h36m', 'cmup','mpiinf','mpiinf_test', 'jta', 'pw3d_nc','pw3d_oc','pw3d_vibe'] #'pw3d', 
-MPJAE_ds = ['pw3d_normal', 'h36m']
+dataset_involved = ['eh36m', 'h36m', 'mupots', 'pw3d', 'mpiinf', 'jta','cmup', 'oh','mpiinf_test', 'pw3d_pc', 'pw3d_nc','pw3d_oc','pw3d_vibe', 'pw3d_normal','agora','mini','pw3d_od']
+dataset_kp2ds = ['eh36m', 'h36m', 'mupots', 'pw3d', 'mpiinf', 'jta','cmup', 'oh','mpiinf_test', 'pw3d_pc', 'pw3d_nc','pw3d_oc','pw3d_vibe', 'pw3d_normal','agora','mini','relativity', 'aich', 'crowdpose','pw3d_od']
+dataset_smpl2lsp = ['eh36m', 'h36m', 'cmup','mpiinf','mpiinf_test', 'jta', 'pw3d_nc','pw3d_oc','pw3d_vibe'] #'pw3d', 
+MPJAE_ds = ['pw3d_normal', 'h36m', 'eh36m']
 PVE_ds = ['pw3d_pc', 'pw3d_nc','pw3d_oc','pw3d_vibe', 'pw3d_normal', 'oh','agora','mini']
 dataset_depth = ['mupots','agora','mini','pw3d_od']
 dataset_relative_depth = ['relativity']

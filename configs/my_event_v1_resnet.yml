@@ -40,6 +40,8 @@ ARGS:
  model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
  in_channel: 6
  color_jittering_ratio: 0
+ test_interval: 200
+ fast_eval_iter: 50
 
 loss_weight:
   MPJPE: 200.

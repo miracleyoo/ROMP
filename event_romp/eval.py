@@ -74,7 +74,7 @@ def calc_outputs_evaluation_matrix(self, outputs, ED):
             if self.calc_pck:
                 pck_joints_sampled = constants.SMPL_MAJOR_JOINTS if real_3d.shape[1] == 24 else np.arange(12)
                 mpjpe_pck_batch = calc_pck(
-                        real_3d, predicts, lrhip=lrhip, pck_joints=pck_joints_sampled).cpu().numpy()*1000
+                        real_3d, predicts, pck_joints=pck_joints_sampled).cpu().numpy()*1000
                 ED['PCK3D'][ds].append((mpjpe_pck_batch.reshape(-1) < self.PCK_thresh).astype(np.float32)*100)
                 if ds in constants.MPJAE_ds:
                     rel_pose_pred = torch.cat([outputs['params']['global_orient'][val_idx], outputs['params']['body_pose'][val_idx]], 1)[:, :22*3].contiguous()
@@ -222,6 +222,15 @@ def print_results(ED):
         table.add_row(['2']+PA_MPJPE_acts)
         print(table)
 
+    if len(ED['MPJPE']['eh36m'])>0:
+        print('Detail results on Human3.6M dataset:')
+        PA_MPJPE_acts = h36m_evaluation_act_wise(np.concatenate(ED['PA_MPJPE']['eh36m'],axis=0),np.concatenate(np.array(ED['imgpaths']['eh36m']),axis=0),constants.h36m_action_names)
+        MPJPE_acts = h36m_evaluation_act_wise(np.concatenate(ED['MPJPE']['eh36m'],axis=0),np.concatenate(np.array(ED['imgpaths']['eh36m']),axis=0),constants.h36m_action_names)
+        table = PrettyTable(['Protocol']+constants.h36m_action_names)
+        table.add_row(['1']+MPJPE_acts)
+        table.add_row(['2']+PA_MPJPE_acts)
+        print(table)
+
     return eval_results
 
 def process_matrix(matrix, name, times=1.):
@@ -271,5 +280,5 @@ def print_table(eval_results):
     print('-'*20)
 
 
-if __name__ == '__main__':
-    test_depth_error()
+# if __name__ == '__main__':
+#     test_depth_error()
