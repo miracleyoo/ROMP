@@ -113,7 +113,7 @@ def val_result(self, loader_val, evaluation = False, vis_results=False):
             self, outputs, ED)
 
         if iter_num % (self.val_batch_size*2) == 0:
-            print('{}/{}'.format(iter_num, len(loader_val)))
+            # print('{}/{}'.format(iter_num, len(loader_val)))
             #eval_results = print_results(ED.copy())
             if not evaluation:
                 outputs = self.network_forward(eval_model, meta_data_org, self.val_cfg)
