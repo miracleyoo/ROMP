@@ -347,7 +347,7 @@ def tore_to_redgreen(tore):
     """
     h, w, c = tore.shape
     tore = tore.reshape(h, w, 3, 2)[:,:,0,:]
-    rgb = np.concatenate((tore, np.zeros((h,w,1))), axis=-1)
+    rgb = np.concatenate((tore, np.zeros((h,w,1), dtype=tore.dtype)), axis=-1)#.astype(tore.dtype)
     return rgb
 
 def batch_tore_rg(tores):
