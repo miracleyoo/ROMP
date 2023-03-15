@@ -14,7 +14,7 @@ import csv
 import platform
 import os,sys
 import glob
-import datetime
+from datetime import datetime
 from io import BytesIO
 from scipy.spatial.transform import Rotation as R
 
