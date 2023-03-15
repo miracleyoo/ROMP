@@ -126,9 +126,11 @@ def convert2canonical(joints,dataset_name):
         canonical[i]['sticks'] = joints2sticks(canonical[i]['joints'],dataset_name)
     return canonical
 
+# MPJPE: Mean Per Joint Position Error
+
 def eval_pck(dataset_name, gt, pred,vis, thresh=0.05):
     """
-    Compute average PCKh per joint.
+    Compute average PCK per joint. PCK means Percentage of Correct Keypoints. The threshold is 5% of the torso height.
     Matching threshold is 50% (thresh) of the head segment box size by default
     Args:
       gt_joints, predicted_joints: arrays of gt and predicted joints in the canonical order
@@ -167,7 +169,7 @@ def eval_pck(dataset_name, gt, pred,vis, thresh=0.05):
 
 def eval_pckh(dataset_name, gt, pred,vis, thresh=0.5):
     """
-    Compute average PCKh per joint.
+    Compute average PCKh per joint. PCKh is the percentage of correctly detected joints based on the head size.
     Matching threshold is 50% (thresh) of the head segment box size by default
     Args:
       gt_joints, predicted_joints: arrays of gt and predicted joints in the canonical order
