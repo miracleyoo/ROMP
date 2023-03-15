@@ -7,7 +7,7 @@ import yaml
 import logging
 import time
 import platform 
-from .utils.util import get_time_str
+from utils.util import get_time_str
 
 currentfile = os.path.abspath(__file__)
 time_stamp = get_time_str()
