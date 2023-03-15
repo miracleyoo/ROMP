@@ -225,7 +225,7 @@ def print_results(ED):
         print(table)
 
     if len(ED['MPJPE']['eh36m'])>0:
-        print('Detail results on Human3.6M dataset:')
+        print('Detail results on Event-ized Human3.6M dataset:')
         PA_MPJPE_acts = h36m_evaluation_act_wise(np.concatenate(ED['PA_MPJPE']['eh36m'],axis=0),np.concatenate(np.array(ED['imgpaths']['eh36m']),axis=0),constants.h36m_action_names)
         MPJPE_acts = h36m_evaluation_act_wise(np.concatenate(ED['MPJPE']['eh36m'],axis=0),np.concatenate(np.array(ED['imgpaths']['eh36m']),axis=0),constants.h36m_action_names)
         table = PrettyTable(['Protocol']+constants.h36m_action_names)
