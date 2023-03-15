@@ -7,14 +7,19 @@ import yaml
 import logging
 import time
 import platform 
+from .utils.util import get_time_str
 
 currentfile = os.path.abspath(__file__)
+time_stamp = get_time_str()
+
 code_dir = currentfile.replace('config.py','')
 project_dir = currentfile.replace(os.path.sep+os.path.join('event_romp', 'lib', 'config.py'), '')
 source_dir = currentfile.replace(os.path.sep+os.path.join('lib', 'config.py'), '')
-root_dir = project_dir.replace(project_dir.split(os.path.sep)[-1], '')
+# root_dir = project_dir.replace(project_dir.split(os.path.sep)[-1], '')
+root_dir = os.path.joint(project_dir, 'experiment_logs', time_stamp)
+os.makedirs(root_dir, exist_ok=True)
 
-time_stamp = time.strftime('%Y-%m-%d_%H:%M:%S',time.localtime(int(round(time.time()*1000))/1000))
+# time_stamp = time.strftime('%Y-%m-%d_%H:%M:%S',time.localtime(int(round(time.time()*1000))/1000))
 yaml_timestamp = os.path.abspath(os.path.join(project_dir, 'active_configs' + os.sep + "active_context_{}.yaml".format(time_stamp).replace(":","_")))
 
 model_dir = os.path.join(project_dir,'model_data')
