@@ -16,7 +16,7 @@ code_dir = currentfile.replace('config.py','')
 project_dir = currentfile.replace(os.path.sep+os.path.join('event_romp', 'lib', 'config.py'), '')
 source_dir = currentfile.replace(os.path.sep+os.path.join('lib', 'config.py'), '')
 # root_dir = project_dir.replace(project_dir.split(os.path.sep)[-1], '')
-root_dir = os.path.joint(project_dir, 'experiment_logs', time_stamp)
+root_dir = os.path.join(project_dir, 'experiment_logs', time_stamp)
 os.makedirs(root_dir, exist_ok=True)
 
 # time_stamp = time.strftime('%Y-%m-%d_%H:%M:%S',time.localtime(int(round(time.time()*1000))/1000))
