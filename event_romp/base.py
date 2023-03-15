@@ -82,11 +82,17 @@ class Base(object):
         self.summary_writer = SummaryWriter(self.log_path)
         save_yaml(hparams_dict, self.log_file.replace('.log', '.yml'))
 
-        self.result_img_dir = os.path.join(config.root_dir, 'result_images', '{}_on_gpu{}_val'.format(self.tab, self.gpu))
+        basic_info = '{}_on_gpu{}_val'.format(self.tab, self.gpu)
+        basic_info_file_path = os.path.join(self.root_dir, f'{basic_info}.txt')
+        # create an empty file
+        with open(basic_info_file_path, 'w') as f:
+            f.write('')
+
+        self.result_img_dir = os.path.join(config.root_dir, 'result_images')
         os.makedirs(self.result_img_dir,exist_ok=True)
-        self.train_img_dir = os.path.join(config.root_dir, 'result_image_train', '{}_on_gpu{}_val'.format(self.tab, self.gpu))
+        self.train_img_dir = os.path.join(config.root_dir, 'result_image_train')
         os.makedirs(self.train_img_dir,exist_ok=True)
-        self.model_save_dir = os.path.join(config.root_dir, 'checkpoints', '{}_on_gpu{}_val'.format(self.tab, self.gpu))
+        self.model_save_dir = os.path.join(config.root_dir, 'checkpoints')
         os.makedirs(self.model_save_dir,exist_ok=True)
 
     def _init_params(self):
