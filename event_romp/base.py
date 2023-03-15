@@ -83,7 +83,7 @@ class Base(object):
         save_yaml(hparams_dict, self.log_file.replace('.log', '.yml'))
 
         basic_info = '{}_on_gpu{}_val'.format(self.tab, self.gpu)
-        basic_info_file_path = os.path.join(self.root_dir, f'{basic_info}.txt')
+        basic_info_file_path = os.path.join(config.root_dir, f'{basic_info}.txt')
         # create an empty file
         with open(basic_info_file_path, 'w') as f:
             f.write('')
