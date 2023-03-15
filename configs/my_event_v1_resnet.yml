@@ -17,7 +17,7 @@ ARGS:
  nw_eval: 2
  lr: 0.00005
 
- fine_tune: False
+ fine_tune: True
  fix_backbone_training_scratch: False
  eval: False
  supervise_global_rot: False
@@ -37,7 +37,8 @@ ARGS:
  centermap_size: 64
  centermap_conf_thresh: 0.2
 
- model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
+#  model_path: '/gypsum/scratch1/zhongyangzha/DVS_HPE/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
+ model_path: '/home/zhongyangzha_umass_edu/checkpoints/resnet_cm64_DVS_V1_resnet_on_gpu0,1,2,3_val'
  in_channel: 6
  color_jittering_ratio: 0
  test_interval: 1000
