@@ -14,10 +14,20 @@ import csv
 import platform
 import os,sys
 import glob
+import datetime
 from io import BytesIO
 from scipy.spatial.transform import Rotation as R
 
 TAG_CHAR = np.array([202021.25], np.float32)
+
+def get_time_str():
+    """ Return a time string.
+        Used in file naming.
+    """
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%Y_%m_%d_%H_%M_%S")
+    return date_time
+
 
 def get_kp2d_on_org_img(kp2d, offset):
     assert kp2d.shape[1]>=2, print('Espected shape of kp2d is Kx2, while get {}'.formt(kp2d.shape))
