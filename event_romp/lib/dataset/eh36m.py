@@ -98,6 +98,9 @@ def EH36M(base_class=default_mode):
             imgpath = os.path.join(self.image_folder,img_name)
             # image = cv2.imread(imgpath)[:,:,::-1]
             image = np.load(imgpath).transpose(1,2,0)
+            #!WARNNING! Please remove this line and modify the images size-based code in image_base later
+            image = cv2.resize(image, (1002, 1000), interpolation = cv2.INTER_CUBIC)
+
             kp2d = self.map_kps(info['kp2d'].reshape(-1,2).copy(),maps=self.joint_mapper)
             kp2ds = np.concatenate([kp2d,self.kps_vis],1)[None]
             
@@ -123,7 +126,7 @@ def EH36M(base_class=default_mode):
             img_info = {'imgpath': imgpath, 'image': image, 'kp2ds': kp2ds, 'track_ids': track_ids,\
                     'vmask_2d': np.array([[True,True,True]]), 'vmask_3d': np.array([[True,True,True,True,True,True]]),\
                     'kp3ds': kp3ds, 'params': params, 'root_trans': root_trans, 'verts': verts,\
-                    'camMats': camMats, 'camDists': camDists, 'img_size': (1002, 1000), 'ds': 'eh36m'}
+                    'camMats': camMats, 'camDists': camDists, 'img_size': image.shape[:2], 'ds': 'eh36m'}
             #image.shape[:2]
             if 'relative' in base_class:
                 img_info['depth'] = np.array([[0, self.subject_gender[subject_id], 0, 0]])
