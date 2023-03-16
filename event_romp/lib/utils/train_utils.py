@@ -235,8 +235,8 @@ def train_entire_model(model, backbone='resnet', partial_freeze=False):
             param.requires_grad = False
             exclude_layer.append(name)
             logging.info('freeze layer {}'.format(name))
-        # else:
-        #     param.requires_grad = True
+        else:
+            param.requires_grad = True
                 
     # for name, param in model.named_parameters():
     #     if 'smpl' not in name:
