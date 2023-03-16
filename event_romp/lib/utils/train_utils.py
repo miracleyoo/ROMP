@@ -27,9 +27,11 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
             return pre_state_dict['module.'+key]
         return None
 
-    unfreeze_heads = unfreeze_head_dict[backbone]
+    if partial_freeze:
+        unfreeze_heads = unfreeze_head_dict[backbone]
     
     for k in cur_state_dict.keys():
+        print('k:', k)
         if partial_freeze and any([k.lstrip('module.').startswith(uh) for uh in unfreeze_heads]):
             continue
         
