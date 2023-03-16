@@ -40,7 +40,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
             if v is None:
                 failed_layers.append(k)
                 continue
-            print('k:', k, type(k))
+            print('k2:', k, type(k))
             print('cur_state_dict[k]: ', cur_state_dict[k], type(cur_state_dict[k]))
             cur_state_dict[k].copy_(v)
             if 'module.' in k:
