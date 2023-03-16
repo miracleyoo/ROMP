@@ -234,7 +234,7 @@ def train_entire_model(model, backbone='resnet', partial_freeze=False):
         if not unfreeze_flag:
             param.requires_grad = False
             exclude_layer.append(name)
-            logging.info('freeze layer {}'.format(name))
+            # logging.info('freeze layer {}'.format(name))
         else:
             param.requires_grad = True
                 
@@ -248,7 +248,8 @@ def train_entire_model(model, backbone='resnet', partial_freeze=False):
     if len(exclude_layer)==0:
         logging.info('Training all layers.')
     else:
-        logging.info('Train all layers, except: {}'.format(exclude_layer))
+        # logging.info('Train all layers, except: {}'.format(exclude_layer))
+        logging.info(f'{len(exclude_layer)} layers are frozen. The first frozen layer is {exclude_layer[0]}, and the last frozen layer is {exclude_layer[-1]}')
 
     return model
 

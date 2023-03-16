@@ -31,11 +31,11 @@ class Trainer(Base):
         self.model.train()
         if self.fix_backbone_training_scratch:
             fix_backbone(self.model, exclude_key=['backbone.'])
-        else:
-            train_entire_model(self.model, backbone=args().backbone, partial_freeze=args().partial_freeze)
+        # else:
+        #     train_entire_model(self.model, backbone=args().backbone, partial_freeze=args().partial_freeze)
         for epoch in range(self.epoch):
-            if epoch==1:
-                train_entire_model(self.model, backbone=args().backbone, partial_freeze=args().partial_freeze)
+            # if epoch==1:
+            #     train_entire_model(self.model, backbone=args().backbone, partial_freeze=args().partial_freeze)
             self.train_epoch(epoch)
         self.summary_writer.close()
 
