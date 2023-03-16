@@ -42,7 +42,8 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
             if 'module.' in k:
                 k=k.lstrip('module.')
             success_layers.append(k)
-        except:
+        except Exception as e:
+            logging.warning(e)
             logging.warning('copy param {} failed, mismatched'.format(k)) # logging.info
             continue
     if len(failed_layers)>0:
