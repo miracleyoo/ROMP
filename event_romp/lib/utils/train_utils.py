@@ -3,7 +3,7 @@ import random
 import torch
 import numpy as np
 import logging
-from unfreeze_layers import unfreeze_head_dict
+from .unfreeze_layers import unfreeze_head_dict
 
 def justify_detection_state(detection_flag, reorganize_idx):
     if detection_flag.sum() == 0:
