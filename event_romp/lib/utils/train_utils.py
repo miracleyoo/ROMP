@@ -21,8 +21,10 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
         key = key.replace(drop_prefix,'')
         # key = prefix + key
         
-        if key in pre_state_dict or ('module.'+key) in pre_state_dict:
+        if key in pre_state_dict in pre_state_dict:
             return pre_state_dict[key]
+        elif 'module.'+key in pre_state_dict:
+            return pre_state_dict['module.'+key]
         return None
 
     unfreeze_heads = unfreeze_head_dict[backbone]
