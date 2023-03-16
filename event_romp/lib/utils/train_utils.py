@@ -22,8 +22,10 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
         # key = prefix + key
         
         if key in pre_state_dict in pre_state_dict:
+            print('IN: ', key)
             return pre_state_dict[key]
         elif 'module.'+key in pre_state_dict:
+            print('IN: module.'+key)
             return pre_state_dict['module.'+key]
         return None
 
@@ -37,6 +39,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
         
         try:
             v = _get_params(k)
+            print('get param success.')
             if v is None:
                 failed_layers.append(k)
                 continue
