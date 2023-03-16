@@ -21,11 +21,9 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
         key = key.replace(drop_prefix,'')
         # key = prefix + key
         
-        if key in pre_state_dict in pre_state_dict:
-            print('IN: ', key)
+        if key in pre_state_dict:
             return pre_state_dict[key]
         elif 'module.'+key in pre_state_dict:
-            print('IN: module.'+key)
             return pre_state_dict['module.'+key]
         return None
 
@@ -39,18 +37,14 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
         
         try:
             v = _get_params(k)
-            print('get param success.')
             if v is None:
                 failed_layers.append(k)
                 continue
-            print('k2:', k, type(k))
-            print('cur_state_dict[k]: ', cur_state_dict[k], type(cur_state_dict[k]))
             cur_state_dict[k].copy_(v)
             if 'module.' in k:
                 k=k.lstrip('module.')
             success_layers.append(k)
         except Exception as e:
-            logging.warning(e)
             logging.warning('copy param {} failed, mismatched'.format(k)) # logging.info
             continue
     if len(failed_layers)>0:
