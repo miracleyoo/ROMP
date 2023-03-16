@@ -44,9 +44,9 @@ class Base(object):
         if self.fine_tune or self.eval:
             drop_prefix = ''
             if self.model_version==6:
-                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=True)
+                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=True, backbone=self.backbone, partial_freeze=self.partial_freeze)
             else:
-                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=False)
+                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=False, backbone=self.backbone, partial_freeze=self.partial_freeze)
                 train_entire_model(model, backbone=self.backbone, partial_freeze=self.partial_freeze)
 
         if self.distributed_training:

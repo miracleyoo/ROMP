@@ -13,19 +13,25 @@ def justify_detection_state(detection_flag, reorganize_idx):
         detection_flag = True
     return detection_flag, reorganize_idx
 
-def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=False):
+def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=False, backbone='resnet', partial_freeze=False):
     success_layers, failed_layers = [], []
     # print("Current state dict keys: ", cur_state_dict.keys())
     # print("Pretrained state dict keys: ", pre_state_dict.keys())
     def _get_params(key):
         key = key.replace(drop_prefix,'')
         # key = prefix + key
+        
         if key in pre_state_dict or ('module.'+key) in pre_state_dict:
             return pre_state_dict[key]
         return None
 
+    unfreeze_heads = unfreeze_head_dict[backbone]
+    
     for k in cur_state_dict.keys():
         v = _get_params(k)
+        if partial_freeze and any([k.startswith(uh) for uh in unfreeze_heads]):
+            continue
+
         try:
             if v is None:
                 failed_layers.append(k)
@@ -53,7 +59,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
 
     return success_layers
 
-def load_model(path, model, drop_prefix='', **kwargs):
+def load_model(path, model, drop_prefix='', backbone='resnet', partial_freeze=False, **kwargs):
     logging.info('using fine_tune model: {}'.format(path))
     if os.path.exists(path):
         pretrained_model = torch.load(path)
@@ -61,7 +67,7 @@ def load_model(path, model, drop_prefix='', **kwargs):
         if isinstance(pretrained_model, dict):
             if 'model_state_dict' in pretrained_model:
                 pretrained_model = pretrained_model['model_state_dict']
-        copy_state_dict(current_model, pretrained_model, drop_prefix=drop_prefix, **kwargs)
+        copy_state_dict(current_model, pretrained_model, drop_prefix=drop_prefix, backbone=backbone, partial_freeze=partial_freeze, **kwargs)
         logging.info('loading model {} success!'.format(path))
         
     else:
@@ -211,7 +217,7 @@ def process_pretrained(model_dict):
             type_name = key.split('.')[-1]
             model_dict['module.net.features.'+str(num+1)+'.'+type_name] = model_dict[key]
     return model_dict
-
+    
 
 def train_entire_model(model, backbone='resnet', partial_freeze=False):
     exclude_layer = []
