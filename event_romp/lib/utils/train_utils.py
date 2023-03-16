@@ -14,6 +14,8 @@ def justify_detection_state(detection_flag, reorganize_idx):
 
 def copy_state_dict(cur_state_dict, pre_state_dict, prefix = 'module.', drop_prefix='', fix_loaded=False):
     success_layers, failed_layers = [], []
+    print("Current state dict keys: ", cur_state_dict.keys())
+    print("Pretrained state dict keys: ", pre_state_dict.keys())
     def _get_params(key):
         key = key.replace(drop_prefix,'')
         key = prefix + key
