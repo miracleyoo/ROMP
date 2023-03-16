@@ -29,7 +29,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=F
     
     for k in cur_state_dict.keys():
         v = _get_params(k)
-        if partial_freeze and any([k.startswith(uh) for uh in unfreeze_heads]):
+        if partial_freeze and any([k.lstrip('module.').startswith(uh) for uh in unfreeze_heads]):
             continue
 
         try:
@@ -225,7 +225,7 @@ def train_entire_model(model, backbone='resnet', partial_freeze=False):
     unfreeze_heads = unfreeze_head_dict[backbone]
     for name, param in model.named_parameters():
         if partial_freeze:
-            unfreeze_flag = any([name.startswith(uh) for uh in unfreeze_heads])
+            unfreeze_flag = any([name.lstrip('module.').startswith(uh) for uh in unfreeze_heads])
         else:
             unfreeze_flag = True
             
