@@ -33,7 +33,7 @@ class HigherResolutionNet(nn.Module):
 
     def load_pretrain_params(self):
         if os.path.exists(args().hrnet_pretrain):
-            success_layer = copy_state_dict(self.state_dict(), torch.load(args().hrnet_pretrain), prefix = '', fix_loaded=True)
+            success_layer = copy_state_dict(self.state_dict(), torch.load(args().hrnet_pretrain), fix_loaded=True)
 
     def _make_transition_layer(
             self, num_channels_pre_layer, num_channels_cur_layer):

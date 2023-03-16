@@ -28,7 +28,7 @@ class ResNet_50(nn.Module):
 
     def load_pretrain_params(self):
         if os.path.exists(args().resnet_pretrain):
-            success_layer = copy_state_dict(self.state_dict(), torch.load(args().resnet_pretrain), prefix = '', fix_loaded=True)
+            success_layer = copy_state_dict(self.state_dict(), torch.load(args().resnet_pretrain), fix_loaded=True)
 
     def image_preprocess(self, x):
         x = BHWC_to_BCHW(x)/255.
