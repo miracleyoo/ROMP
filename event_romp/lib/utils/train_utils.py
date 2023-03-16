@@ -18,7 +18,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, prefix = 'module.', drop_pre
     print("Pretrained state dict keys: ", pre_state_dict.keys())
     def _get_params(key):
         key = key.replace(drop_prefix,'')
-        key = prefix + key
+        # key = prefix + key
         if key in pre_state_dict:
             return pre_state_dict[key]
         return None
