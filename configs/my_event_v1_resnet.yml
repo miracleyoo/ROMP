@@ -38,8 +38,8 @@ ARGS:
  centermap_conf_thresh: 0.2
  partial_freeze: True
 
-#  model_path: '/home/zhongyangzha_umass_edu/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
- model_path: '/home/zhongyangzha_umass_edu/checkpoints/resnet_cm64_DVS_V1_resnet_on_gpu0,1,2,3_val/74_65.9132_51.3547_resnet_cm64_DVS_V1_resnet.pkl'
+ model_path: '/home/zhongyangzha_umass_edu/ROMP/trained_models/ROMP_ResNet50_V1.pkl'
+#  model_path: '/home/zhongyangzha_umass_edu/checkpoints/resnet_cm64_DVS_V1_resnet_on_gpu0,1,2,3_val/74_65.9132_51.3547_resnet_cm64_DVS_V1_resnet.pkl'
  in_channel: 6
  color_jittering_ratio: 0
  test_interval: 1000
