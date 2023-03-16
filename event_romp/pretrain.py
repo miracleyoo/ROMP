@@ -71,7 +71,7 @@ class Trainer(Base):
             fix_backbone(self.model, exclude_key=['backbone.'])
         for epoch in range(self.epoch):
             if epoch==1:
-                train_entire_model(self.model)
+                train_entire_model(self.model,  backbone=args().backbone, partial_freeze=args().partial_freeze)
             self.train_epoch(epoch)
         self.summary_writer.close()
 

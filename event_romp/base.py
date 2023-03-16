@@ -44,10 +44,11 @@ class Base(object):
         if self.fine_tune or self.eval:
             drop_prefix = ''
             if self.model_version==6:
-                model = load_model(self.model_path, model, prefix = 'module.', drop_prefix=drop_prefix, fix_loaded=True)
+                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=True)
             else:
-                model = load_model(self.model_path, model, prefix = 'module.', drop_prefix=drop_prefix, fix_loaded=False) 
-                train_entire_model(model)
+                model = load_model(self.model_path, model, drop_prefix=drop_prefix, fix_loaded=False)
+                train_entire_model(model, backbone=self.backbone, partial_freeze=self.partial_freeze)
+
         if self.distributed_training:
             print('local_rank', self.local_rank)
             device = torch.device('cuda', self.local_rank)

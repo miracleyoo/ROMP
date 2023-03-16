@@ -3,6 +3,7 @@ import random
 import torch
 import numpy as np
 import logging
+from ..models.unfreeze_layers import unfreeze_head_dict
 
 def justify_detection_state(detection_flag, reorganize_idx):
     if detection_flag.sum() == 0:
@@ -12,14 +13,14 @@ def justify_detection_state(detection_flag, reorganize_idx):
         detection_flag = True
     return detection_flag, reorganize_idx
 
-def copy_state_dict(cur_state_dict, pre_state_dict, prefix = 'module.', drop_prefix='', fix_loaded=False):
+def copy_state_dict(cur_state_dict, pre_state_dict, drop_prefix='', fix_loaded=False):
     success_layers, failed_layers = [], []
-    print("Current state dict keys: ", cur_state_dict.keys())
-    print("Pretrained state dict keys: ", pre_state_dict.keys())
+    # print("Current state dict keys: ", cur_state_dict.keys())
+    # print("Pretrained state dict keys: ", pre_state_dict.keys())
     def _get_params(key):
         key = key.replace(drop_prefix,'')
         # key = prefix + key
-        if key in pre_state_dict:
+        if key in pre_state_dict or ('module.'+key) in pre_state_dict:
             return pre_state_dict[key]
         return None
 
@@ -30,13 +31,16 @@ def copy_state_dict(cur_state_dict, pre_state_dict, prefix = 'module.', drop_pre
                 failed_layers.append(k)
                 continue
             cur_state_dict[k].copy_(v)
-            if prefix in k and prefix!='':
-                k=k.split(prefix)[1]
+            if 'module.' in k:
+                k=k.lstrip('module.')
             success_layers.append(k)
         except:
-            print('copy param {} failed, mismatched'.format(k)) # logging.info
+            logging.warning('copy param {} failed, mismatched'.format(k)) # logging.info
             continue
-    print('missing parameters of layers:{}'.format(failed_layers))
+    if len(failed_layers)>0:
+        logging.info('missing parameters of layers:{}'.format(failed_layers))
+    else:
+        logging.info('all parameters are loaded successfully')
 
     if fix_loaded and len(failed_layers)>0:
         logging.info('fixing the layers that were loaded successfully, while train the layers that failed,')
@@ -49,7 +53,7 @@ def copy_state_dict(cur_state_dict, pre_state_dict, prefix = 'module.', drop_pre
 
     return success_layers
 
-def load_model(path, model, prefix = 'module.', drop_prefix='',optimizer=None, **kwargs):
+def load_model(path, model, drop_prefix='', **kwargs):
     logging.info('using fine_tune model: {}'.format(path))
     if os.path.exists(path):
         pretrained_model = torch.load(path)
@@ -57,8 +61,9 @@ def load_model(path, model, prefix = 'module.', drop_prefix='',optimizer=None, *
         if isinstance(pretrained_model, dict):
             if 'model_state_dict' in pretrained_model:
                 pretrained_model = pretrained_model['model_state_dict']
-        copy_state_dict(current_model, pretrained_model, prefix = prefix, drop_prefix=drop_prefix, **kwargs)
+        copy_state_dict(current_model, pretrained_model, drop_prefix=drop_prefix, **kwargs)
         logging.info('loading model {} success!'.format(path))
+        
     else:
         logging.warning('model {} not exist!'.format(path))
     return model
@@ -66,7 +71,11 @@ def load_model(path, model, prefix = 'module.', drop_prefix='',optimizer=None, *
 def save_single_model(model,path):
     logging.info('saving {}'.format(path))
     #model_save = {'model_state_dict':model.state_dict(),'optimizer_state_dict':optimizer.state_dict()}
-    torch.save(model.module.state_dict(), path)
+    if isinstance(model, torch.nn.DataParallel):
+        torch.save(model.module.state_dict(), path)
+    else:
+        torch.save(model.state_dict(), path)
+    # torch.save(model.module.state_dict(), path)
 
 def save_model(model, title, parent_folder=None):
     if not os.path.exists(parent_folder):
@@ -204,21 +213,38 @@ def process_pretrained(model_dict):
     return model_dict
 
 
-def train_entire_model(net):
+def train_entire_model(model, backbone='resnet', partial_freeze=False):
     exclude_layer = []
-    for index,(name,param) in enumerate(net.named_parameters()):
-        if 'smpl' not in name:
-            param.requires_grad = True
+    
+    unfreeze_heads = unfreeze_head_dict[backbone]
+    for name, param in model.named_parameters():
+        if partial_freeze:
+            unfreeze_flag = any([name.startswith(uh) for uh in unfreeze_heads])
         else:
-            if param.requires_grad:
-                exclude_layer.append(name)
-            param.requires_grad =False
+            unfreeze_flag = True
+            
+        if 'smpl' in name and param.requires_grad:
+            unfreeze_flag = False
+        if not unfreeze_flag:
+            param.requires_grad = False
+            exclude_layer.append(name)
+            logging.info('freeze layer {}'.format(name))
+        # else:
+        #     param.requires_grad = True
+                
+    # for name, param in model.named_parameters():
+    #     if 'smpl' not in name:
+    #         param.requires_grad = True
+    #     else:
+    #         if param.requires_grad:
+    #             exclude_layer.append(name)
+    #         param.requires_grad =False
     if len(exclude_layer)==0:
         logging.info('Training all layers.')
     else:
         logging.info('Train all layers, except: {}'.format(exclude_layer))
 
-    return net
+    return model
 
 def init_seeds(seed=0, cuda_deterministic=False):
     random.seed(seed)

@@ -111,6 +111,7 @@ def parse_args(input_args=None):
     model_group.add_argument('--hrnet_pretrain', type=str, default= os.path.join(project_dir,'trained_models/pretrain_hrnet.pkl'))
     model_group.add_argument('--resnet_pretrain', type=str, default= os.path.join(project_dir,'trained_models/pretrain_resnet.pkl'))
     model_group.add_argument('--in_channel', type=int, default=3)
+    model_group.add_argument('--partial_freeze',type = bool,default = False,help = 'whether to freeze the backbone partially')
 
     loss_group = parser.add_argument_group(title='loss options')
     # loss settings
